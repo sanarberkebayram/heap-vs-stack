@@ -13,7 +13,7 @@ fn benchmark_heap(c: &mut Criterion) {
 fn benchmark_stack(c: &mut Criterion) {
     let stack_bundle = ecommerce_stack::new_test();
 
-    c.bench_function("heap_get_total_price", |b| {
+    c.bench_function("stack_get_total_price", |b| {
         b.iter(|| stack_bundle.get_total_price())
     });
 }
