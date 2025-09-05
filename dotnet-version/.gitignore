@@ -1,0 +1,57 @@
+# Visual Studio
+.vs/
+
+# Binaries
+[Bb]in/
+[Oo]bj/
+
+# Packages
+*.nupkg
+# End of default packages directory
+
+# Build results
+*.exe
+*.dll
+*.pdb
+*.tmp
+*.user
+*.suo
+*.userprefs
+*.log
+
+# Rider
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# NuGet
+.nuget/
+packages/
+
+# Misc
+*.pid
+*.pid.lock
+*.swo
+*.swp
+*.bak
+*.orig
+*.pyc
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+*.log
+*.cache
+*.sublime-project
+*.sublime-workspace
+*.vscode/

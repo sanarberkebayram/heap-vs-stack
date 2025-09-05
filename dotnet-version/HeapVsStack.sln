@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeapVsStack.Console", "HeapVsStack.Console\HeapVsStack.Console.csproj", "{343C95FE-52B6-4C97-907C-D75160D4EAB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeapVsStack.Benchmark", "HeapVsStack.Benchmark\HeapVsStack.Benchmark.csproj", "{0694F552-971A-4F22-938D-7EDCD9F7D722}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{343C95FE-52B6-4C97-907C-D75160D4EAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343C95FE-52B6-4C97-907C-D75160D4EAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343C95FE-52B6-4C97-907C-D75160D4EAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343C95FE-52B6-4C97-907C-D75160D4EAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0694F552-971A-4F22-938D-7EDCD9F7D722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0694F552-971A-4F22-938D-7EDCD9F7D722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0694F552-971A-4F22-938D-7EDCD9F7D722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0694F552-971A-4F22-938D-7EDCD9F7D722}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

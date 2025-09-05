@@ -100,18 +100,13 @@ impl<'a> ProductBundle<'a> {
             components: Vec::new(),
             discount_strategy: &PERCENTAGE_15,
         };
-        a.add(Box::new(Product::new(
-            "Laptop",
-            15000.0,
-            &NO_DISCOUNT,
-        )));
-        a.add(Box::new(Product::new("Gaming Mouse", 1200.0, &NO_DISCOUNT)));
-        a.add(Box::new(Product::new(
-            "Mechanical Keyboard",
-            800.0,
-            &NO_DISCOUNT,
-        )));
-
+        for i in 0..100000 {
+            a.add(Box::new(Product::new(
+                Box::leak(format!("Product {}", i).into_boxed_str()),
+                (i + 1) as f64 * 100.0,
+                &NO_DISCOUNT,
+            )));
+        }
         a
     }
 }
@@ -146,10 +141,7 @@ struct PriceDisplayObserver;
 
 impl PriceObserver for PriceDisplayObserver {
     fn update(&self, new_price: f64, product_name: &str) {
-        println!(
-            "💰 Price Updated: {} -> {:.2}₺",
-            product_name, new_price
-        );
+        println!("💰 Price Updated: {} -> {:.2}₺", product_name, new_price);
     }
 }
 
@@ -197,11 +189,7 @@ static FIXED_200: FixedDiscount = FixedDiscount(200.0);
 
 pub fn heap_test() {
     let mut gaming_bundle = ProductBundle::new("Gaming Bundle", &PERCENTAGE_15);
-    gaming_bundle.add(Box::new(Product::new(
-        "Laptop",
-        15000.0,
-        &NO_DISCOUNT,
-    )));
+    gaming_bundle.add(Box::new(Product::new("Laptop", 15000.0, &NO_DISCOUNT)));
     gaming_bundle.add(Box::new(Product::new("Gaming Mouse", 1200.0, &NO_DISCOUNT)));
     gaming_bundle.add(Box::new(Product::new(
         "Mechanical Keyboard",
@@ -212,7 +200,9 @@ pub fn heap_test() {
     gaming_bundle.display(0);
 
     gaming_bundle.set_discount_strategy(&PERCENTAGE_20);
-    println!("
-After changing the strategy:");
+    println!(
+        "
+After changing the strategy:"
+    );
     gaming_bundle.display(0);
 }

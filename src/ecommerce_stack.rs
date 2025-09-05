@@ -136,20 +136,23 @@ pub fn stack_test() {
     gaming_bundle.display(0);
 
     let gaming_bundle_fixed = gaming_bundle.set_discount_strategy(FixedDiscount(3000.0));
-    println!("
-After changing the strategy:");
+    println!(
+        "
+After changing the strategy:"
+    );
     gaming_bundle_fixed.display(0);
 }
 
 pub fn new_test() -> ProductBundle<Product<NoDiscount>, PercentageDiscount> {
-    let laptop = Product::new("Laptop", 15000.0, NoDiscount);
-    let mouse = Product::new("Gaming Mouse", 1200.0, NoDiscount);
-    let keyboard = Product::new("Mechanical Keyboard", 800.0, NoDiscount);
+    let mut components = Vec::new();
+    for i in 0..100000 {
+        components.push(Product::new(
+            Box::leak(format!("Product {}", i).into_boxed_str()),
+            (i + 1) as f64 * 100.0,
+            NoDiscount,
+        ));
+    }
 
-    let gaming_bundle = ProductBundle::new(
-        "Gaming Bundle",
-        vec![laptop, mouse, keyboard],
-        PercentageDiscount(15.0),
-    );
+    let gaming_bundle = ProductBundle::new("Gaming Bundle", components, PercentageDiscount(15.0));
     return gaming_bundle;
 }
