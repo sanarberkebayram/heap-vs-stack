@@ -1,4 +1,3 @@
-// ---------------- Strategy Pattern ----------------
 trait DiscountStrategy {
     fn apply_discount(&self, price: f64) -> f64;
     fn strategy_name(&self) -> &'static str;
@@ -13,7 +12,7 @@ impl DiscountStrategy for NoDiscount {
         price
     }
     fn strategy_name(&self) -> &'static str {
-        "İndirimsiz"
+        "No Discount"
     }
 }
 
@@ -22,7 +21,7 @@ impl DiscountStrategy for PercentageDiscount {
         price * (1.0 - self.0 / 100.0)
     }
     fn strategy_name(&self) -> &'static str {
-        "Yüzde İndirim"
+        "Percentage Discount"
     }
 }
 
@@ -31,18 +30,16 @@ impl DiscountStrategy for FixedDiscount {
         (price - self.0).max(0.0)
     }
     fn strategy_name(&self) -> &'static str {
-        "Sabit İndirim"
+        "Fixed Discount"
     }
 }
 
-// ---------------- Composite Pattern ----------------
 trait ProductComponent {
     fn get_total_price(&self) -> f64;
     fn display(&self, depth: usize);
     fn set_discount_strategy(&mut self);
 }
 
-// Leaf
 pub struct Product<S: DiscountStrategy> {
     name: &'static str,
     price: f64,
@@ -73,18 +70,16 @@ impl<S: DiscountStrategy> ProductComponent for Product<S> {
     }
     fn display(&self, depth: usize) {
         println!(
-            "{}Ürün: {} | Fiyat: {:.2}₺ | Strateji: {}",
+            "{}Product: {} | Price: {:.2}₺ | Strategy: {}",
             "-".repeat(depth),
             self.name,
             self.get_total_price(),
             self.discount_strategy.strategy_name()
         );
     }
-    fn set_discount_strategy(&mut self) { /* placeholder */
-    }
+    fn set_discount_strategy(&mut self) {}
 }
 
-// Composite
 pub struct ProductBundle<C: ProductComponent, S: DiscountStrategy> {
     name: &'static str,
     components: Vec<C>,
@@ -107,7 +102,7 @@ impl<C: ProductComponent, S: DiscountStrategy> ProductBundle<C, S> {
 
     pub fn display(&self, depth: usize) {
         println!(
-            "{}Paket: {} | Toplam: {:.2}₺ | Strateji: {}",
+            "{}Bundle: {} | Total: {:.2}₺ | Strategy: {}",
             "-".repeat(depth),
             self.name,
             self.get_total_price(),
@@ -127,14 +122,13 @@ impl<C: ProductComponent, S: DiscountStrategy> ProductBundle<C, S> {
     }
 }
 
-// ---------------- Demo ----------------
 pub fn stack_test() {
-    let mut laptop = Product::new("Dizüstü Bilgisayar", 15000.0, NoDiscount);
-    let mut mouse = Product::new("Oyuncu Mouse", 1200.0, NoDiscount);
-    let mut keyboard = Product::new("Mekanik Klavye", 800.0, NoDiscount);
+    let mut laptop = Product::new("Laptop", 15000.0, NoDiscount);
+    let mut mouse = Product::new("Gaming Mouse", 1200.0, NoDiscount);
+    let mut keyboard = Product::new("Mechanical Keyboard", 800.0, NoDiscount);
 
     let gaming_bundle = ProductBundle::new(
-        "Oyun Paketi",
+        "Gaming Bundle",
         vec![laptop, mouse, keyboard],
         PercentageDiscount(15.0),
     );
@@ -142,17 +136,18 @@ pub fn stack_test() {
     gaming_bundle.display(0);
 
     let gaming_bundle_fixed = gaming_bundle.set_discount_strategy(FixedDiscount(3000.0));
-    println!("\nStrateji değiştirildikten sonra:");
+    println!("
+After changing the strategy:");
     gaming_bundle_fixed.display(0);
 }
 
 pub fn new_test() -> ProductBundle<Product<NoDiscount>, PercentageDiscount> {
-    let laptop = Product::new("Dizüstü Bilgisayar", 15000.0, NoDiscount);
-    let mouse = Product::new("Oyuncu Mouse", 1200.0, NoDiscount);
-    let keyboard = Product::new("Mekanik Klavye", 800.0, NoDiscount);
+    let laptop = Product::new("Laptop", 15000.0, NoDiscount);
+    let mouse = Product::new("Gaming Mouse", 1200.0, NoDiscount);
+    let keyboard = Product::new("Mechanical Keyboard", 800.0, NoDiscount);
 
     let gaming_bundle = ProductBundle::new(
-        "Oyun Paketi",
+        "Gaming Bundle",
         vec![laptop, mouse, keyboard],
         PercentageDiscount(15.0),
     );

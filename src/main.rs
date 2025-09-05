@@ -7,10 +7,6 @@ fn main() {
     println!("Heap");
     heap_test();
 
-    //
-    //
-    //
-
     println!("Stack");
     stack_test();
 }
